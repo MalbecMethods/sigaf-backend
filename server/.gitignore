@@ -1,10 +1,1 @@
-env
-venv
-backend/__pycache__
-base/__pycache__
-base/api/__pycache__
-base/migrations/__pycache__
-datasets/__pycache__
-datasets/appdataset/__pycache__
-datasets/migrations/__pycache__
-datasets/news/__pycache__
+node_modules
