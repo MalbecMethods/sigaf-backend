@@ -3,17 +3,26 @@ import bcryptjs from 'bcryptjs';
 
 export class AuthService {
 
-    async createUser(username: string, email: string, password: string, role: string): Promise<User> {
+    static async createUser(nombre:string, apellido:string, username: string, email: string, password: string, role: string, cuil:string): Promise<User> {
         const user = new User();
+        user.role = role;
         user.username = username;
         user.email = email;
         user.password = bcryptjs.hashSync(password, 10);
-        user.role = role;
-        return user.save();
+        user.nombre = nombre;
+        user.apellido = apellido;
+        user.cuil = cuil;
+
+        console.log(user);
+      return user.save();
     }
 
     async getUsers(): Promise<User[]> {
         return User.findAll();
+    }
+
+    async getUserByRole(role: string): Promise<User[]> {
+        return User.findAll({ where: { role : role } });
     }
 
     async getUserById(id: string): Promise<User | null> {

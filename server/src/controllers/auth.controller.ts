@@ -6,25 +6,40 @@ import { TokenService } from "../services/token.service";
 
 export class AuthController {
 
-    async registerUser(req: Request, res: Response) {
-        const { username, email, password } = req.body;
-        const role = 'user';
-        const user = await new AuthService().createUser(username, email, password, role);
+    async registerAdmin(req: Request, res: Response) {
+        const { nombre, apellido, username, email, password, cuil} = req.body;
+        const role = 'admin';
+        console.log(req.body)
+        const user = await AuthService.createUser(nombre, apellido, username, email, password, role, cuil);
         
-        const token = new TokenService().generateToken(user);
-        res.status(201).json({ token, role });
+        const token = TokenService.generateToken(user);
+        res.status(201).json({ token });
     }
 
-    async loginUser(req: Request, res: Response) {
+    async registerUser(req: Request, res: Response) {
+        const { nombre, apellido, username, email, password, cuil } = req.body;
+        const role = 'user';
+        const user = await AuthService.createUser(nombre, apellido, username, email, password, role, cuil);
+        const token = TokenService.generateToken(user);
+        res.status(201).json({ token });
+    }
+
+    async getUsers(req: Request, res: Response) {
+        const users = await new AuthService().getUserByRole('user');
+        res.status(200).json(users);
+
+    }
+
+    async Login(req: Request, res: Response) {
         const { username, password } = req.body;
         const user = await new AuthService().getUserByUsername(username);
-        const role = user.role;
-        console.log(role);
         if (bcryptjs.compareSync(password, user.password)) {
-            const token = new TokenService().generateToken(user);
-            res.status(200).json({ token, role });
+            const token =  TokenService.generateToken(user);
+            res.status(200).json({ token});
         } else {    
             res.status(401).json({ message: 'Credenciales inválidas' });
         }      
     }
+
+    
 }

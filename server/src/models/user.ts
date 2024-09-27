@@ -10,6 +10,13 @@ export class User extends Model {
         allowNull: false,
     })
     id: string;
+
+    @Column({
+        type: DataType.ENUM('admin', 'user'),
+        allowNull: false,
+        defaultValue: 'user',
+    })
+    role: string;
     
     @Column({
         type: DataType.STRING,
@@ -44,16 +51,10 @@ export class User extends Model {
     apellido: string;
 
     @Column({
-        type: DataType.INTEGER,
+        type: DataType.STRING,
         allowNull: true
     })
-    cuil: number;
+    cuil: string;
 
-    @Column({
-        type: DataType.ENUM('admin', 'user'),
-        allowNull: false,
-        defaultValue: 'user'
-    })
-    role: string;
 
 }
