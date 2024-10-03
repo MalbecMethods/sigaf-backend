@@ -5,9 +5,7 @@ import helmet from 'helmet';
 import { conexiondb } from './config/conexiondb';
 import authRoutes from './routes/auth.routes';
 import apiRoutes from './routes/api.routes';
-
-
-
+import establecimientoRoutes from './routes/establecimiento.routes';
 class Server {
     private app: Application;
     private port: number;
@@ -18,14 +16,11 @@ class Server {
         this.dbconexion();
         this.middlewares();
         this.routes();
-        
     }
 
     async dbconexion(): Promise<void> {
         await conexiondb();
-    
     }
-
 
     middlewares(): void {
         this.app.use(cors());
@@ -37,8 +32,7 @@ class Server {
     routes(): void {
         this.app.use(authRoutes);
         this.app.use(apiRoutes);
-
-
+        this.app.use(establecimientoRoutes); 
     }
 
     listen(): void {
@@ -46,11 +40,6 @@ class Server {
             console.log(`Servidor corriendo en ${this.port}`);
         });
     }
-
-
-
-
 }
-
 
 export default Server;

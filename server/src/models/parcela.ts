@@ -1,5 +1,6 @@
-import { Table, Column, Model, DataType, Default } from "sequelize-typescript";
+import { Table, Column, Model, DataType, Default, ForeignKey } from "sequelize-typescript";
 import { v4 as uuidv4 } from "uuid";
+import { Establecimiento } from "./establecimiento";
 
 @Table({ tableName: "parcela" })
 export class Parcela extends Model {
@@ -14,8 +15,13 @@ export class Parcela extends Model {
     @Column({
         type: DataType.STRING,
         allowNull: false,
-        unique: true
     })
     geojson: string;
 
+    @ForeignKey(() => Establecimiento)
+    @Column({
+        type: DataType.UUID,
+        allowNull: false,
+    })
+    establecimientoId: string; // Clave foránea que apuntará a Establecimiento
 }
