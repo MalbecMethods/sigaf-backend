@@ -18,5 +18,13 @@ export class EstablecimientoService {
         }
     }
 
+    async getEstablecimientoById(id: string) {
+        try {
+            return await Establecimiento.findByPk(id, { include: [Parcela] });
+        } catch (error) {
+            throw new Error(`Error al obtener establecimiento: ${error instanceof Error ? error.message : "Error desconocido"}`);
+        }
+    }
+
     // otros métodos
 }
