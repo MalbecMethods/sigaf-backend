@@ -2,9 +2,9 @@ import { Establecimiento } from "../models/establecimiento";
 import { Parcela } from "../models/parcela"; 
 
 export class EstablecimientoService {
-    async createEstablecimiento(nombre: string, provincia: string, ciudad: string, poligono: number[][]) {
+    async createEstablecimiento(userId:string ,nombre: string, provincia: string, ciudad: string, poligono: number[][]) {
         try {
-            return await Establecimiento.create({ nombre, provincia, ciudad, poligono });
+            return await Establecimiento.create({ userId ,nombre, provincia, ciudad, poligono });
         } catch (error) {
             throw new Error(`Error al crear el establecimiento: ${error instanceof Error ? error.message : "Error desconocido"}`);
         }

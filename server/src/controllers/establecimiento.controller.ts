@@ -9,18 +9,29 @@ export class EstablecimientoController {
     }
 
     registerEstablecimiento = async (req: Request, res: Response) => {
-        const { nombre, provincia, ciudad, poligono } = req.body; // Asegúrate de que estos campos están en el cuerpo de la solicitud.
+        const { nombre, provincia, ciudad, poligono } = req.body;
+        
+        // Aserción de tipo para indicarle a TypeScript que req.user tiene un id
+        const userId = (req as any).user?.sub;
+        console.log("ID del usuario:", userId);
 
+        
+    
+        if (!userId) {
+            return res.status(403).json({ message: 'No autorizado' });
+        }
+    
         try {
-            const establecimiento = await this.establecimientoService.createEstablecimiento(nombre, provincia, ciudad, poligono);
+            const establecimiento = await this.establecimientoService.createEstablecimiento(userId, nombre, provincia, ciudad, poligono);
             res.status(201).json(establecimiento);
         } catch (error) {
-            console.error("Error al crear el establecimiento:", error); // Log de error
+            console.error("Error al crear el establecimiento:", error);
             res.status(500).json({
                 message: `Error al crear el establecimiento: ${error instanceof Error ? error.message : "Error desconocido"}`,
             });
         }
-    }
+    };
+    
 
     getEstablecimientos = async (req: Request, res: Response) => {
         try {

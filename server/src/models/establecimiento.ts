@@ -1,6 +1,7 @@
-import { Table, Column, Model, DataType, Default, HasMany } from "sequelize-typescript";
+import { Table, Column, Model, DataType, Default, ForeignKey, BelongsTo, HasMany } from "sequelize-typescript";
 import { v4 as uuidv4 } from "uuid";
 import { Parcela } from "./parcela";
+import { User } from "./user"; // Importamos el modelo User
 
 @Table({ tableName: "establecimiento" })
 export class Establecimiento extends Model {
@@ -34,7 +35,17 @@ export class Establecimiento extends Model {
         type: DataType.JSON,
         allowNull: true,
     })
-    poligono: number[][]; 
+    poligono: number[][];
+
+    @ForeignKey(() => User)
+    @Column({
+        type: DataType.UUID,
+        allowNull: false,
+    })
+    userId: string;
+    
+    @BelongsTo(() => User)
+    user: User;
 
     @HasMany(() => Parcela)
     parcelas: Parcela[];
