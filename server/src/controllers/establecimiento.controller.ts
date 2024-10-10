@@ -33,9 +33,14 @@ export class EstablecimientoController {
     };
     
 
-    getEstablecimientos = async (req: Request, res: Response) => {
+    getEstablecimientos = async (req: Request, res: Response) => { 
         try {
-            const establecimientos = await this.establecimientoService.getEstablecimientos();
+            // Obtener el userId desde la solicitud (asumiendo que viene del middleware de autenticación)
+            const userId = (req as any).user?.sub; // Asegúrate de que 'user' esté siendo añadido correctamente en el middleware de autenticación
+    
+            // Llamar al servicio con el userId para filtrar los establecimientos
+            const establecimientos = await this.establecimientoService.getEstablecimientos(userId);
+    
             res.status(200).json(establecimientos);
         } catch (error) {
             console.error("Error al obtener establecimientos:", error); // Log de error
@@ -44,6 +49,7 @@ export class EstablecimientoController {
             });
         }
     }
+    
 
     getEstablecimientoById = async (req: Request, res: Response) => {
         const { id } = req.params;

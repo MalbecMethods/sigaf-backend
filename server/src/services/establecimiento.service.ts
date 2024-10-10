@@ -10,13 +10,17 @@ export class EstablecimientoService {
         }
     }
 
-    async getEstablecimientos(): Promise<Establecimiento[]> {
+    async getEstablecimientos(userId: string): Promise<Establecimiento[]> {
         try {
-            return await Establecimiento.findAll({ include: [Parcela] });
+            return await Establecimiento.findAll({
+                where: { userId }, // Filtrar por el userId del usuario autenticado
+                include: [Parcela]  // Incluir las parcelas relacionadas
+            });
         } catch (error) {
             throw new Error(`Error al obtener establecimientos: ${error instanceof Error ? error.message : "Error desconocido"}`);
         }
     }
+    
 
     async getEstablecimientoById(id: string) {
         try {
