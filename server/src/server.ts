@@ -1,5 +1,4 @@
 import express, { Application } from 'express';
-
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
@@ -7,6 +6,8 @@ import { conexiondb } from './config/conexiondb';
 import authRoutes from './routes/auth.routes';
 import apiRoutes from './routes/api.routes';
 import establecimientoRoutes from './routes/establecimiento.routes';
+import parcelaRoutes from './routes/parcela.routes';
+
 class Server {
     private app: Application;
     private port: number;
@@ -33,7 +34,8 @@ class Server {
     routes(): void {
         this.app.use(authRoutes);
         this.app.use(apiRoutes);
-        this.app.use(establecimientoRoutes); 
+        this.app.use(establecimientoRoutes);
+        this.app.use(parcelaRoutes);
     }
 
     listen(): void {
