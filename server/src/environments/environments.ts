@@ -12,4 +12,5 @@ export const envs = {
     DB_NAME: env.get("DB_NAME").required().asString(),
     DB_DIALECT: process.env.DB_DIALECT as Dialect,
     SECRET_TOKEN: env.get("SECRET_TOKEN").required().asString(),
+    SERP_API: env.get("SERP_API").required().asString(),
 }

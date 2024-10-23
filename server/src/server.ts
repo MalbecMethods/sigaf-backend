@@ -7,6 +7,7 @@ import authRoutes from './routes/auth.routes';
 import apiRoutes from './routes/api.routes';
 import establecimientoRoutes from './routes/establecimiento.routes';
 import parcelaRoutes from './routes/parcela.routes';
+import lensRouter from './routes/lens.routes';
 
 class Server {
     private app: Application;
@@ -36,6 +37,7 @@ class Server {
         this.app.use(apiRoutes);
         this.app.use(establecimientoRoutes);
         this.app.use(parcelaRoutes);
+        this.app.use(lensRouter);
     }
 
     listen(): void {
