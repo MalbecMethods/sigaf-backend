@@ -8,6 +8,9 @@ import apiRoutes from './routes/api.routes';
 import establecimientoRoutes from './routes/establecimiento.routes';
 import parcelaRoutes from './routes/parcela.routes';
 import lensRouter from './routes/lens.routes';
+import insumoRoutes from "./routes/insumo.routes";
+import campaniaRoutes from "./routes/campania.routes";
+import parcelaInsumoRoutes from "./routes/parcela.insumo.routes";
 
 class Server {
     private app: Application;
@@ -38,6 +41,9 @@ class Server {
         this.app.use(establecimientoRoutes);
         this.app.use(parcelaRoutes);
         this.app.use(lensRouter);
+        this.app.use(insumoRoutes)
+        this.app.use(campaniaRoutes)
+        this.app.use(parcelaInsumoRoutes)
     }
 
     listen(): void {

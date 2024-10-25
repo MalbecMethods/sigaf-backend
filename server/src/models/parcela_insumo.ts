@@ -1,7 +1,7 @@
 import { Table, Column, Model, DataType, Default, ForeignKey, BelongsTo } from "sequelize-typescript";
 import { v4 as uuidv4 } from "uuid";
 import { Parcela } from "./parcela";
-import { Campania } from "./Campania";
+import { Campania } from "./campania";
 import { Insumo } from "./insumo";
 
 @Table({ tableName: "parcela_insumo" })
