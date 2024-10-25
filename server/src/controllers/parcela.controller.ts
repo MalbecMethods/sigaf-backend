@@ -9,7 +9,7 @@ export class ParcelaController {
     }
 
     createParcela = async (req: Request, res: Response) => {
-        const { nombre, poligono, establecimientoId } = req.body;
+        const { nombre, poligono, establecimientoId, area} = req.body;
         const userId = (req as any).user?.sub;
 
         if (!userId) {
@@ -17,7 +17,7 @@ export class ParcelaController {
         }
 
         try {
-            const parcela = await this.parcelaService.createParcela(nombre, poligono, establecimientoId);
+            const parcela = await this.parcelaService.createParcela(nombre, poligono, establecimientoId, area);
             res.status(201).json(parcela);
         } catch (error) {
             console.error("Error al crear la parcela:", error);
