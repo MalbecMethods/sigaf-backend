@@ -43,8 +43,14 @@ export class LensService {
   
       // Extraer los títulos del visual_matches
       const titles = [];
-      for (const match of jsonData.visual_matches) {
-        titles.push(match.title);
+
+      if (!jsonData.visual_matches) {
+        return;
+      }
+      else {
+              for (const match of jsonData.visual_matches) {
+                titles.push(match.title);
+              }
       }
       
       const iaGemini = await fetch('http://localhost:5000/',  {
