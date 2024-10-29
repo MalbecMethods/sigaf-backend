@@ -45,4 +45,22 @@ export class ParcelaController {
             });
         }
     };
+
+    getAllParcelas = async (req: Request, res: Response) => {
+        const userId = (req as any).user?.sub;
+
+        if (!userId) {
+            return res.status(403).json({ message: 'No autorizado' });
+        }
+
+        try {
+            const parcelas = await this.parcelaService.getAllParcelas();
+            res.status(200).json(parcelas);
+        } catch (error) {
+            console.error("Error al obtener todas las parcelas:", error);
+            res.status(500).json({
+                message: `Error al obtener todas las parcelas: ${error instanceof Error ? error.message : "Error desconocido"}`,
+            });
+        }
+    }
 }
