@@ -30,6 +30,12 @@ export class Insumo extends Model {
     unidad: string;
 
     @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    duracion: string;
+
+    @Column({
         type: DataType.FLOAT,
         allowNull: false,
     })

@@ -28,3 +28,15 @@ export const deleteInsumo = async (req: Request, res: Response) => {
     await insumoService.deleteInsumo(req.params.id);
     res.sendStatus(204);
 };
+
+export const patchInsumo = async (req: Request, res: Response) => {
+    try {
+        const updatedInsumo = await insumoService.updateInsumo(req.params.id, req.body);
+        if (!updatedInsumo) {
+            return res.status(404).json({ message: 'Insumo no encontrado' });
+        }
+        res.status(200).json(updatedInsumo);
+    } catch (error: any) { 
+        res.status(500).json({ message: 'Error al actualizar el insumo', error: error.message });
+    }
+};
