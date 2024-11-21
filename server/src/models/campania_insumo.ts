@@ -4,8 +4,8 @@ import { Parcela } from "./parcela";
 import { Campania } from "./campania";
 import { Insumo } from "./insumo";
 
-@Table({ tableName: "parcela_insumo" })
-export class ParcelaInsumo extends Model {
+@Table({ tableName: "campania_insumo" })
+export class CampaniaInsumo extends Model {
     @Default(uuidv4)
     @Column({
         type: DataType.UUID,

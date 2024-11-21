@@ -1,10 +1,10 @@
-import { Table, Column, Model, DataType, Default, ForeignKey, BelongsTo, HasMany } from "sequelize-typescript";
+import { Table, Column, Model, DataType, Default, ForeignKey, BelongsTo } from "sequelize-typescript";
 import { v4 as uuidv4 } from "uuid";
 import { Parcela } from "./parcela";
-import { CampaniaInsumo } from "./campania_insumo";
+import { User } from "./user"; 
 
-@Table({ tableName: "campanias" })
-export class Campania extends Model {
+@Table({ tableName: "actividad" })
+export class Actividad extends Model {
     @Default(uuidv4)
     @Column({
         type: DataType.UUID,
@@ -17,36 +17,37 @@ export class Campania extends Model {
         type: DataType.STRING,
         allowNull: false,
     })
-    nombre: string;
+    titulo: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    descripcion: string;
 
     @Column({
         type: DataType.DATE,
         allowNull: false,
     })
-    fecha_inicio: Date;
-
-    @Column({
-        type: DataType.DATE,
-        allowNull: true,
-    })
-    fecha_fin: Date;
-
-    @Column({
-        type: DataType.INTEGER,
-        allowNull: true,
-    })
-    duracion_dias: number;
+    fecha: Date;
 
     @ForeignKey(() => Parcela)
     @Column({
         type: DataType.UUID,
         allowNull: false,
     })
-    parcela_id: string;
+    parcelaId: string;
 
     @BelongsTo(() => Parcela)
     parcela: Parcela;
 
-    @HasMany(() => CampaniaInsumo)
-    insumos: CampaniaInsumo[];
+    @ForeignKey(() => User)
+    @Column({
+        type: DataType.UUID,
+        allowNull: false,
+    })
+    usuarioId: string;
+
+    @BelongsTo(() => User)
+    usuario: User;
 }
