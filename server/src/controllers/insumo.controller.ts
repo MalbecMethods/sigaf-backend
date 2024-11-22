@@ -15,7 +15,9 @@ export const getInsumoById = async (req: Request, res: Response) => {
 };
 
 export const createInsumo = async (req: Request, res: Response) => {
-    const newInsumo = await insumoService.createInsumo(req.body);
+    const { Insumo } = req.body
+    console.log(req.body)
+    const newInsumo = await insumoService.createInsumo({ ...req.body });
     res.json(newInsumo);
 };
 
@@ -36,7 +38,7 @@ export const patchInsumo = async (req: Request, res: Response) => {
             return res.status(404).json({ message: 'Insumo no encontrado' });
         }
         res.status(200).json(updatedInsumo);
-    } catch (error: any) { 
+    } catch (error: any) {
         res.status(500).json({ message: 'Error al actualizar el insumo', error: error.message });
     }
 };

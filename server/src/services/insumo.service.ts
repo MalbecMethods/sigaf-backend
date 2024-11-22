@@ -11,7 +11,7 @@ export class InsumoService {
     }
 
     async createInsumo(data: any) {
-        return Insumo.create(data);
+        return await Insumo.create(data);
     }
 
     async updateInsumo(id: string, data: any) {

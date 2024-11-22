@@ -10,8 +10,14 @@ export class StockService {
         return Stock.findByPk(id);
     }
 
+    async getStockByEstablecimientoAndProducto(establecimientoId: string, producto: string) {
+        return Stock.findAll({
+            where: { establecimientoId, producto },
+        });
+    }
+
     async createStock(data: any) {
-        return Stock.create(data);
+        return await Stock.create(data);
     }
 
     async updateStock(id: string, data: any) {

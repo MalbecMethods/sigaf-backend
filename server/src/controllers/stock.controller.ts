@@ -14,8 +14,18 @@ export const getStockById = async (req: Request, res: Response) => {
     res.json(stock);
 };
 
+export const getStockByEstablecimientoAndProducto = async (req: Request, res: Response) => {
+    const { establecimientoId, producto } = req.query;
+    const stock = await stockService.getStockByEstablecimientoAndProducto(
+        establecimientoId as string,
+        producto as string
+    );
+    res.json(stock);
+};
+
 export const createStock = async (req: Request, res: Response) => {
-    const newStock = await stockService.createStock(req.body);
+    const {Stock} = req.body
+    const newStock = await stockService.createStock(Stock);
     res.json(newStock);
 };
 

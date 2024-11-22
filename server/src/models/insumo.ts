@@ -33,7 +33,7 @@ export class Insumo extends Model {
         type: DataType.STRING,
         allowNull: false,
     })
-    duracion: string;
+    categoria: string;
 
     @Column({
         type: DataType.FLOAT,
