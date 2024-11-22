@@ -1,9 +1,23 @@
 // src/services/campaniaInsumoService.ts
 import { CampaniaInsumo } from "../models/campania_insumo";
+import { Establecimiento } from "../models/establecimiento";
+import { Insumo } from "../models/insumo";
+import { Parcela } from "../models/parcela";
 
 export class CampaniaInsumoService {
     async getAllCampaniaInsumos() {
-        return CampaniaInsumo.findAll();
+        return await CampaniaInsumo.findAll({
+            include: [
+                {
+                    model: Parcela,
+                    include: [
+                        {
+                            model: Establecimiento,
+                        }
+                    ]
+                }
+            ]
+        });
     }
 
     async getCampaniaInsumoById(id: string) {

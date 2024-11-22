@@ -1,9 +1,12 @@
 // src/services/campaniaService.ts
 import { Campania } from "../models/campania";
+import { Parcela } from "../models/parcela";
 
 export class CampaniaService {
     async getAllCampanias() {
-        return Campania.findAll();
+        return Campania.findAll({
+            include: { model: Parcela }
+        });
     }
 
     async getCampaniaById(id: string) {

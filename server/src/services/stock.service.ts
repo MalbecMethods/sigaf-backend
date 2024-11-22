@@ -1,4 +1,3 @@
-// src/services/stockService.ts
 import { Stock } from "../models/stock";
 
 export class StockService {
@@ -16,9 +15,9 @@ export class StockService {
         });
     }
 
-    async createStock(data: any) {
-        return await Stock.create(data);
-    }
+    async createStock(data: any) { 
+        return await Stock.create(data); 
+    } 
 
     async updateStock(id: string, data: any) {
         const stock = await Stock.findByPk(id);
@@ -53,5 +52,4 @@ export class StockService {
             }
         }
     }
-    
 }
