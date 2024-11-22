@@ -37,6 +37,13 @@ export class Campania extends Model {
     })
     duracion_dias: number;
 
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+    })
+    finalizada: boolean;    
+
     @ForeignKey(() => Parcela)
     @Column({
         type: DataType.UUID,
