@@ -1,5 +1,5 @@
 // src/services/actividadService.ts
-import { Actividad } from "../models/Actividad"
+import { Actividad } from "../models/actividad"
 
 export class ActividadService {
     async getAllActividades() {

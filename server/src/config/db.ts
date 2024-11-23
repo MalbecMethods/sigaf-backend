@@ -7,7 +7,7 @@ import { CampaniaInsumo } from '../models/campania_insumo';
 import { Insumo } from '../models/insumo'; 
 import { Campania } from '../models/campania';
 import { Stock } from '../models/stock';
-import { Actividad } from '../models/Actividad'
+import { Actividad } from '../models/actividad'
 
 
 const { DB_DIALECT, DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } = envs;

@@ -31,24 +31,27 @@ export class StockService {
 
     async addStockFromCampaign(campaign: any) {
         const { insumos } = campaign; 
+        console.log('Campaign:', JSON.stringify(campaign, null, 2));
     
         for (const insumo of insumos) {
-            const existingStock = await Stock.findOne({
-                where: { 
-                    producto: insumo.nombre, 
-                    establecimientoId: campaign.parcela.establecimientoId 
-                },
-            });
-    
-            if (existingStock) {
-                await existingStock.update({ cantidad: existingStock.cantidad + insumo.cantidad });
-            } else {
-                await Stock.create({
-                    producto: insumo.nombre,
-                    categoria: insumo.categoria,
-                    cantidad: insumo.cantidad,
-                    establecimientoId: campaign.parcela.establecimientoId,
+            try {
+                const { nombre, categoria, cantidad, establecimientoId } = insumo;
+                if (!nombre || !categoria || !cantidad || !establecimientoId) {
+                    throw new Error("Datos incompletos para actualizar el stock");
+                }
+            
+                const existingStock = await Stock.findOne({
+                    where: { producto: nombre, establecimientoId },
                 });
+    
+                if (existingStock) {
+                    await existingStock.update({ cantidad: existingStock.cantidad + cantidad });
+                } else {
+                    await Stock.create({ producto: nombre, categoria, cantidad, establecimientoId });
+                }
+            } catch (error) {
+                const err = error as Error
+                console.error("Error al actualizar/crear stock:", err.message);
             }
         }
     }

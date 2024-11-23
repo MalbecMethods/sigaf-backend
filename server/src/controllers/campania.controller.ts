@@ -40,25 +40,18 @@ export const endCampania = async (req: Request, res: Response) => {
             return res.status(404).json({ message: "Campaña no encontrada" });
         }
 
-        if (campania.finalizada) {
-            return res.status(400).json({ message: "La campaña ya está finalizada" });
-        }
+        await campania.update({ finalizada: true });
 
-        const today = new Date();
-        if (campania.fecha_fin && new Date(campania.fecha_fin) > today) {
-            return res.status(400).json({ message: "La campaña aún no ha finalizado" });
-        }
-
-        campania.finalizada = true;
-        await campania.save();
-
+        // Procesar insumos asociados
         await stockService.addStockFromCampaign(campania);
-        res.json({ message: "Campaña finalizada y stock actualizado" });
+
+        res.status(200).json({ message: "Campaña finalizada y stock actualizado" });
     } catch (error) {
-        const err = error as Error;
-        console.error("Error finalizando campaña:", err.message);
+        const err = error as Error
+        console.error("Error al finalizar la campaña:", err.message);
         res.status(500).json({ message: "Error al finalizar la campaña" });
     }
 };
+
 
 
