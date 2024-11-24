@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { StockService } from "../services/stock.service";
-import { Parcela } from "../models/parcela"; // Asegúrate de importar el modelo Parcela
 
 const stockService = new StockService();
 
@@ -49,24 +48,18 @@ export const getStockByEstablecimientoAndProducto = async (req: Request, res: Re
 
 export const createStock = async (req: Request, res: Response) => {
     try {
-        const { producto, categoria, cantidad, parcelaId } = req.body;
+        const { producto, categoria, cantidad, establecimientoId, unidad } = req.body;
 
-        if (!producto || !categoria || !cantidad || !parcelaId) {
+        if (!producto || !categoria || !cantidad || !establecimientoId || !unidad) {
             return res.status(400).json({ message: "Todos los campos son obligatorios" });
         }
-
-        const parcela = await Parcela.findByPk(parcelaId); // Verifica si la parcela existe
-        if (!parcela) {
-            return res.status(400).json({ message: "Parcela no encontrada" });
-        }
-
-        const establecimientoId = parcela.establecimientoId;
 
         const newStock = await stockService.createStock({
             producto,
             categoria,
             cantidad,
             establecimientoId,
+            unidad,
         });
 
         res.json(newStock);

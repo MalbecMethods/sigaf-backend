@@ -30,13 +30,23 @@ export class Stock extends Model {
     })
     cantidad: number;
 
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    unidad: string;
+
     @ForeignKey(() => Establecimiento)
     @Column({
         type: DataType.UUID,
         allowNull: false,
     })
     establecimientoId: string;
+    
+
 
     @BelongsTo(() => Establecimiento)
     establecimiento: Establecimiento;
+
+
 }
