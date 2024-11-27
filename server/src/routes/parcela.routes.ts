@@ -8,5 +8,6 @@ const parcelaController = new ParcelaController();
 parcelaRoutes.post("/api/parcela", authenticateJWT, parcelaController.createParcela);
 parcelaRoutes.get("/api/parcelas/:establecimientoId", authenticateJWT, parcelaController.getParcelasByEstablecimiento);
 parcelaRoutes.get("/api/parcelas", authenticateJWT, parcelaController.getAllParcelas);
+parcelaRoutes.get("/api/parcela/:id", parcelaController.getParcelaById);
 
 export default parcelaRoutes;

@@ -1,6 +1,7 @@
 import { Table, Column, Model, DataType, Default, ForeignKey, BelongsTo } from "sequelize-typescript";
 import { v4 as uuidv4 } from "uuid";
 import { Establecimiento } from "./establecimiento";
+import { Insumo } from "./insumo";
 
 @Table({ tableName: "stock" })
 export class Stock extends Model {
@@ -36,6 +37,18 @@ export class Stock extends Model {
     })
     unidad: string;
 
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    parcelaNombre: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    campaniaNombre: string;
+
     @ForeignKey(() => Establecimiento)
     @Column({
         type: DataType.UUID,
@@ -44,9 +57,9 @@ export class Stock extends Model {
     establecimientoId: string;
     
 
-
     @BelongsTo(() => Establecimiento)
     establecimiento: Establecimiento;
-
+    
+    
 
 }

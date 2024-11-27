@@ -63,4 +63,17 @@ export class ParcelaController {
             });
         }
     }
+
+    getParcelaById = async (req: Request, res: Response) => {
+        const { id } = req.params;
+        try {
+            const parcela = await this.parcelaService.getParcelaById(id);
+            res.status(200).json(parcela);
+        } catch (error) {
+            console.error("Error al obtener la parcela:", error);
+            res.status(500).json({
+                message: `Error al obtener la parcela: ${error instanceof Error ? error.message : "Error desconocido"}`,
+            });
+        }
+    }
 }

@@ -48,9 +48,9 @@ export const getStockByEstablecimientoAndProducto = async (req: Request, res: Re
 
 export const createStock = async (req: Request, res: Response) => {
     try {
-        const { producto, categoria, cantidad, establecimientoId, unidad } = req.body;
+        const { producto, categoria, cantidad, establecimientoId, unidad, parcelaNombre, campaniaNombre } = req.body;
 
-        if (!producto || !categoria || !cantidad || !establecimientoId || !unidad) {
+        if (!producto || !categoria || !cantidad || !establecimientoId || !unidad || !parcelaNombre || !campaniaNombre) {
             return res.status(400).json({ message: "Todos los campos son obligatorios" });
         }
 
@@ -60,6 +60,9 @@ export const createStock = async (req: Request, res: Response) => {
             cantidad,
             establecimientoId,
             unidad,
+            parcelaNombre,
+            campaniaNombre
+
         });
 
         res.json(newStock);

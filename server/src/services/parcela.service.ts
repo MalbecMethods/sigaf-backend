@@ -26,4 +26,12 @@ export class ParcelaService {
             throw new Error(`Error al obtener todas las parcelas: ${error instanceof Error ? error.message : "Error desconocido"}`);
         }
     }
+
+    async getParcelaById(id: string) {
+        try {
+            return await Parcela.findByPk(id);
+        } catch (error) {
+            throw new Error(`Error al obtener la parcela: ${error instanceof Error ? error.message : "Error desconocido"}`);
+        }
+    }
 }
