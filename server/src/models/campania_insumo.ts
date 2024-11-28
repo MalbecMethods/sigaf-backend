@@ -41,6 +41,13 @@ export class CampaniaInsumo extends Model {
     cantidad_utilizada: number;
 
     @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+    })
+    cosechado: boolean;
+
+    @Column({
         type: DataType.DATE,
         allowNull: false,
     })

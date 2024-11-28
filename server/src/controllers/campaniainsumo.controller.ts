@@ -20,8 +20,20 @@ export const createCampaniaInsumo = async (req: Request, res: Response) => {
 };
 
 export const updateCampaniaInsumo = async (req: Request, res: Response) => {
-    const updatedCampaniaInsumo = await campaniaInsumoService.updateCampaniaInsumo(req.params.id, req.body);
-    res.json(updatedCampaniaInsumo);
+    try {
+        // Verificamos si el id existe
+        const campaniaInsumoId = req.params.id;
+        const { cosechado, cantidad_utilizada } = req.body; // Extraemos los datos necesarios del cuerpo
+
+        // Actualizamos el CampaniaInsumo con los nuevos valores
+        const updatedCampaniaInsumo = await campaniaInsumoService.updateCampaniaInsumo(campaniaInsumoId, { cosechado, cantidad_utilizada });
+
+        // Respondemos con el CampaniaInsumo actualizado
+        res.json(updatedCampaniaInsumo);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error al actualizar el CampaniaInsumo' });
+    }
 };
 
 export const deleteCampaniaInsumo = async (req: Request, res: Response) => {
