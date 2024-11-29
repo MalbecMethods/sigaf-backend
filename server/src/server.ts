@@ -11,8 +11,9 @@ import lensRouter from './routes/lens.routes';
 import insumoRoutes from "./routes/insumo.routes";
 import campaniaRoutes from "./routes/campania.routes";
 import campaniaInsumoRoutes from "./routes/campania.insumo.routes";
-import stockRoutes from "./routes/stock.routes"
-import actividadRoutes from "./routes/actividad.routes"
+import stockRoutes from "./routes/stock.routes";
+import actividadRoutes from "./routes/actividad.routes";
+import iaRespuestaRoutes from './routes/iaRespuesta.routes';
 
 class Server {
     private app: Application;
@@ -48,6 +49,7 @@ class Server {
         this.app.use(campaniaInsumoRoutes)
         this.app.use(stockRoutes)
         this.app.use(actividadRoutes)
+        this.app.use(iaRespuestaRoutes)
     }
 
     listen(): void {

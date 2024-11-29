@@ -13,7 +13,7 @@ router.post('/uploadLens', upload.single('image'), async (req, res) => {
             console.log(imageUrl);
             const jsonData = await lensService.getJsonData(imageUrl);
             console.log(jsonData);
-            res.status(200).json({ data: jsonData });
+            res.status(200).json({ data: jsonData, imagen: imageUrl });
       } catch (error) {
             res.status(500).json({ error: 'Error al procesar la imagen' });
       }
