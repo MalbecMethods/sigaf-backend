@@ -14,6 +14,13 @@ export class InsumoService {
         return await Insumo.create(data);
     }
 
+    async getInsumosByEstablecimiento(establecimientoId: string) {
+        try {
+            return await Insumo.findAll({ where: { establecimientoId } });
+        } catch (error) {
+            throw new Error(`Error al obtener los insumos: ${error instanceof Error ? error.message : "Error desconocido"}`);
+        }
+    }
     async updateInsumo(id: string, data: any) {
         const insumo = await Insumo.findByPk(id);
         return insumo ? insumo.update(data) : null;

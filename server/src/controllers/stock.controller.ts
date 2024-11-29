@@ -46,6 +46,21 @@ export const getStockByEstablecimientoAndProducto = async (req: Request, res: Re
     res.json(stock);
 };
 
+export const getStockByEstablecimientoId = async (req: Request, res: Response) => {
+    const { establecimientoId } = req.params;
+    try {
+        const campanias = await stockService.getStockByEstablecimientoId(establecimientoId);
+        res.status(200).json(campanias);
+    } catch (error) {
+        console.error("Error al obtener los stocks:", error);
+        res.status(500).json({
+            message: `Error al obtener los stocks: ${error instanceof Error ? error.message : "Error desconocido"}`,
+        });
+    }
+};
+
+
+
 export const createStock = async (req: Request, res: Response) => {
     try {
         const { producto, categoria, cantidad, establecimientoId, unidad, parcelaNombre, campaniaNombre, fechaCampaniaInicio, fechaCampaniaFin } = req.body;

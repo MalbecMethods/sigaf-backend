@@ -1,4 +1,5 @@
 import { Table, Column, Model, DataType, Default, ForeignKey, BelongsTo } from "sequelize-typescript";
+import { Establecimiento } from "./establecimiento";
 import { v4 as uuidv4 } from "uuid";
 
 @Table({ tableName: "insumos" })
@@ -52,4 +53,16 @@ export class Insumo extends Model {
         allowNull: true,
     })
     fecha_expiracion: Date;
+
+    @ForeignKey(() => Establecimiento)
+    @Column({
+        type: DataType.UUID,
+        allowNull: false,
+    })
+    establecimientoId: string;
+
+    @BelongsTo(() => Establecimiento)
+    establecimiento: Establecimiento;
+
+    
 }

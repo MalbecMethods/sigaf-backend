@@ -6,6 +6,7 @@ import { StockService } from "../services/stock.service";
 const campaniaService = new CampaniaService();
 const stockService = new StockService();
 
+
 export const getAllCampanias = async (req: Request, res: Response) => {
     const campanias = await campaniaService.getAllCampanias();
     res.json(campanias);
@@ -14,6 +15,32 @@ export const getAllCampanias = async (req: Request, res: Response) => {
 export const getCampaniaById = async (req: Request, res: Response) => {
     const campania = await campaniaService.getCampaniaById(req.params.id);
     res.json(campania);
+};
+
+export const getCampaniasByParcelaId = async (req: Request, res: Response) => {
+    const { parcela_id } = req.params;
+    try {
+        const campanias = await campaniaService.getCampaniasByParcelaId(parcela_id);
+        res.status(200).json(campanias);
+    } catch (error) {
+        console.error("Error al obtener las campanias:", error);
+        res.status(500).json({
+            message: `Error al obtener las campanias: ${error instanceof Error ? error.message : "Error desconocido"}`,
+        });
+    }
+};
+
+export const getCampaniasByEstablecimiento = async (req: Request, res: Response) => {
+    const { establecimientoId } = req.params;
+    try {
+        const campanias = await campaniaService.getCampaniasByEstablecimiento(establecimientoId);
+        res.status(200).json(campanias);
+    } catch (error) {
+        console.error("Error al obtener las campanias:", error);
+        res.status(500).json({
+            message: `Error al obtener las campanias: ${error instanceof Error ? error.message : "Error desconocido"}`,
+        });
+    }
 };
 
 export const createCampania = async (req: Request, res: Response) => {

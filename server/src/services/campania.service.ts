@@ -28,6 +28,26 @@ export class CampaniaService {
         });
     }
 
+    async getCampaniasByParcelaId(parcela_id: string) {
+        try{
+            return await Campania.findAll({
+                where: { parcela_id },
+            })
+        }
+        catch(error){
+            throw new Error(`Error al obtener las campanias: ${error instanceof Error ? error.message : "Error desconocido"}`);
+        }
+    }
+
+        async getCampaniasByEstablecimiento(establecimientoId: string) {
+        try {
+            return await Campania.findAll({ where: { establecimientoId } });
+        } catch (error) {
+            throw new Error(`Error al obtener los insumos: ${error instanceof Error ? error.message : "Error desconocido"}`);
+        }
+    }
+
+
     async createCampania(data: any) {
         return Campania.create(data);
     }

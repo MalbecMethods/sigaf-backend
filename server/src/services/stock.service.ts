@@ -15,6 +15,12 @@ export class StockService {
         });
     }
 
+    async getStockByEstablecimientoId(establecimientoId: string) {
+        return Stock.findAll({
+            where: { establecimientoId },
+        });
+    }
+
     async createStock(data: any) { 
         return await Stock.create(data); 
     } 

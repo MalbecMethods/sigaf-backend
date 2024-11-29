@@ -14,6 +14,19 @@ export const getInsumoById = async (req: Request, res: Response) => {
     res.json(insumo);
 };
 
+export const getInsumosByEstablecimiento = async (req: Request, res: Response) => {
+    const { establecimientoId } = req.params;
+    try {
+        const campanias = await insumoService.getInsumosByEstablecimiento(establecimientoId);
+        res.status(200).json(campanias);
+    } catch (error) {
+        console.error("Error al obtener los insumos:", error);
+        res.status(500).json({
+            message: `Error al obtener los insumos: ${error instanceof Error ? error.message : "Error desconocido"}`,
+        });
+    }
+};
+
 export const createInsumo = async (req: Request, res: Response) => {
     const { Insumo } = req.body
     console.log(req.body)

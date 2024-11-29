@@ -2,6 +2,7 @@ import { Table, Column, Model, DataType, Default, ForeignKey, BelongsTo, HasMany
 import { v4 as uuidv4 } from "uuid";
 import { Parcela } from "./parcela";
 import { CampaniaInsumo } from "./campania_insumo";
+import { Establecimiento } from "./establecimiento";
 
 @Table({ tableName: "campanias" })
 export class Campania extends Model {
@@ -53,6 +54,17 @@ export class Campania extends Model {
 
     @BelongsTo(() => Parcela)
     parcela: Parcela;
+
+
+    @ForeignKey(() => Establecimiento)
+    @Column({
+        type: DataType.UUID,
+        allowNull: false,
+    })
+    establecimientoId: string;
+
+    @BelongsTo(() => Establecimiento)
+    establecimiento: Establecimiento;
 
     @HasMany(() => CampaniaInsumo)
     insumos: CampaniaInsumo[];
