@@ -1,4 +1,4 @@
-import { Table, Column, Model, DataType, Default, ForeignKey, BelongsTo } from "sequelize-typescript";
+import { Table, Column, Model, DataType, Default, ForeignKey, BelongsTo, AllowNull } from "sequelize-typescript";
 import { v4 as uuidv4 } from "uuid";
 import { Establecimiento } from "./establecimiento";
 import { Insumo } from "./insumo";
@@ -48,6 +48,18 @@ export class Stock extends Model {
         allowNull: false,
     })
     campaniaNombre: string;
+
+    @Column({
+        type: DataType.DATE,
+        allowNull: false,
+    })
+    fechaCampaniaInicio: Date;
+
+    @Column({
+        type: DataType.DATE,
+        allowNull: false,
+    })
+    fechaCampaniaFin: Date;
 
     @ForeignKey(() => Establecimiento)
     @Column({
