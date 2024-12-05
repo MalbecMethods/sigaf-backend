@@ -1,12 +1,13 @@
 // src/routes/actividadRoutes.ts
 import { Router } from "express";
-import { getAllActividades, getActividadById, createActividad, deleteActividad } from "../controllers/actividad.controller";
+import { getAllActividades, getActividadById, createActividad, deleteActividad, getActividadByIdCampania } from "../controllers/actividad.controller";
 
 const router = Router();
 
-router.get("/actividades", getAllActividades);
-router.get("/actividades/:id", getActividadById);
-router.post("/actividades", createActividad);
-router.delete("/actividades/:id", deleteActividad);
+router.get("/api/actividades", getAllActividades);
+router.get('/api/actividades/campania/:campaniaId', getActividadByIdCampania);
+router.get("/api/actividades/:id", getActividadById);
+router.post("/api/actividades", createActividad);
+router.delete("/api/actividades/:id", deleteActividad);
 
 export default router;

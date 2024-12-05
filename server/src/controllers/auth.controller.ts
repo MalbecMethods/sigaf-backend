@@ -37,6 +37,22 @@ export class AuthController {
         }
     }
 
+    async getUserById(req: Request, res: Response) {
+        try {
+          const userId = req.params.id;
+          const user = await new AuthService().getUserById(userId);
+    
+          if (!user) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+          }
+    
+          res.status(200).json(user);
+        } catch (error) {
+          console.error('Error al obtener el usuario:', error);
+          res.status(500).json({ message: 'Error interno del servidor', error: (error as Error).message });
+        }
+      }
+
     async getUsers(req: Request, res: Response) {
         const users = await new AuthService().getUserByRole('user');
         res.status(200).json(users);
