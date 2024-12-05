@@ -56,5 +56,9 @@ export class User extends Model {
     })
     cuil: string;
 
-
+    @Column({
+        type: DataType.STRING,
+        allowNull: true
+    })
+    establecimientoId: string;
 }
