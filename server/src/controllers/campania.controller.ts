@@ -32,16 +32,20 @@ export const getCampaniasByParcelaId = async (req: Request, res: Response) => {
 
 export const getCampaniasByEstablecimiento = async (req: Request, res: Response) => {
     const { establecimientoId } = req.params;
+    console.log("Establecimiento ID recibido en el backend:", establecimientoId);
     try {
         const campanias = await campaniaService.getCampaniasByEstablecimiento(establecimientoId);
+        console.log("Campañas obtenidas del servicio:", campanias);
         res.status(200).json(campanias);
     } catch (error) {
-        console.error("Error al obtener las campanias:", error);
+        console.error("Error al obtener las campañas:", error);
         res.status(500).json({
-            message: `Error al obtener las campanias: ${error instanceof Error ? error.message : "Error desconocido"}`,
+            message: `Error al obtener las campañas: ${error instanceof Error ? error.message : "Error desconocido"}`,
         });
     }
 };
+
+
 
 export const createCampania = async (req: Request, res: Response) => {
     const newCampania = await campaniaService.createCampania(req.body);
