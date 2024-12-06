@@ -40,7 +40,20 @@ export class Insumo extends Model {
         type: DataType.FLOAT,
         allowNull: false,
     })
+    stock: number;
+
+    @Column({
+        type: DataType.FLOAT,
+        allowNull: false,
+    })
     cantidad_disponible: number;
+
+    @Column({
+        type: DataType.FLOAT,
+        allowNull: false,
+        defaultValue: 0,
+    })
+    cantidad_ocupada: number;
 
     @Column({
         type: DataType.FLOAT,
